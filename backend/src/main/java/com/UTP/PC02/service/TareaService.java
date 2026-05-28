@@ -44,4 +44,9 @@ public class TareaService {
         
         return tareaRepository.save(tarea);
     }
+
+    public Tarea getTareaById(Long id) {
+        return tareaRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Tarea no encontrada"));
+    }
 }

@@ -9,6 +9,7 @@ import com.UTP.PC02.dto.TareaDTO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,17 +32,22 @@ public class TareaController {
     }
 
     @PostMapping
-    public Tarea createTarea(@RequestBody @Valid TareaDTO dto) {  // cambia Tarea por TareaDTO
-        return tareaService.createTarea(dto);  // cambia saveTarea por createTarea
+    public Tarea createTarea(@RequestBody @Valid TareaDTO dto) {
+        return tareaService.createTarea(dto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTarea(@PathVariable Long id) {  // falta @PathVariable
+    public void deleteTarea(@PathVariable Long id) {
         tareaService.deleteTarea(id);
     }
 
     @PutMapping("/{id}")
-    public Tarea updateTarea(@PathVariable Long id, @RequestBody @Valid TareaDTO dto) {  // falta @PathVariable y @RequestBody
+    public Tarea updateTarea(@PathVariable Long id, @RequestBody @Valid TareaDTO dto) {
         return tareaService.updateTarea(id, dto);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Tarea> getTareaById(@PathVariable Long id) {
+        return ResponseEntity.ok(tareaService.getTareaById(id));
     }
 }
